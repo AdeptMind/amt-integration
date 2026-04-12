@@ -36,18 +36,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <nav style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
-          <a href="/product/example.html" style={{ marginRight: "1rem" }}>
-            Product
+        <header
+          style={{
+            padding: "0.75rem 1.5rem",
+            backgroundColor: "#1a1a1a",
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <a href="/" style={{ fontSize: "1.25rem", fontWeight: 700, letterSpacing: "0.05em" }}>
+            SUMMIT SUPPLY CO.
           </a>
-          <a href="/category" style={{ marginRight: "1rem" }}>
-            Category
-          </a>
-          <a href="/checkout" style={{ marginRight: "1rem" }}>
-            Checkout
-          </a>
-          <a href="/orderConfirmation">Order Confirmation</a>
-        </nav>
+          <nav style={{ display: "flex", gap: "1.5rem", fontSize: "0.875rem" }}>
+            <a href="/product/example.html">Product</a>
+            <a href="/category">Category</a>
+            <a href="/checkout">Checkout</a>
+            <a href="/orderConfirmation">Order Confirmation</a>
+          </nav>
+        </header>
         {children}
       </body>
     </html>

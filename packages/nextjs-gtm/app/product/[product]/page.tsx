@@ -73,12 +73,8 @@ export default function ProductPage() {
           </div>
 
           <p style={{ color: "#444", lineHeight: 1.7 }}>
-            Built for unpredictable mountain weather, the Alpine Summit Jacket
-            features a 3-layer waterproof shell with fully taped seams and
-            breathable membrane technology. The adjustable storm hood, pit zips,
-            and articulated sleeves give you full range of motion whether
-            you&apos;re scrambling up a ridgeline or navigating city streets in a
-            downpour.
+            3-layer waterproof shell with taped seams and breathable membrane.
+            Built for mountain weather and city rain alike.
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
