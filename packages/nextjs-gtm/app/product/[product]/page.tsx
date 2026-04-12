@@ -16,7 +16,7 @@ export default function ProductPage() {
   const [selectedSize, setSelectedSize] = useState("M");
 
   return (
-    <main style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}>
+    <main style={{ padding: "1rem 2rem", maxWidth: "1500px", margin: "0 auto" }}>
       <div
         style={{
           display: "grid",
@@ -39,7 +39,7 @@ export default function ProductPage() {
           />
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", paddingTop: "1.5rem" }}>
           <div>
             <p style={{ color: "#666", fontSize: "0.875rem", marginBottom: "0.25rem" }}>
               Outerwear
