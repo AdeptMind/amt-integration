@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Script from "next/script";
+import GtmScripts from "./components/GtmScripts";
 import "./globals.css";
-
-const GTM_ID = "GTM-KBK25ZLL";
 
 export const metadata: Metadata = {
   title: "Store",
@@ -17,25 +15,61 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script id="gtm-script" strategy="beforeInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${GTM_ID}');
-`}
-        </Script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (window.location.pathname === '/hpdp-gtm' || window.location.pathname === '/hpdp') {
+                var s = document.createElement('style');
+                s.id = 'amt-whiteout';
+                s.textContent = 'main { visibility: hidden !important; }';
+                document.head.appendChild(s);
+                (function() {
+                  function reveal() {
+                    var el = document.getElementById('amt-whiteout');
+                    if (el) el.remove();
+                  }
+                  if (document.getElementById('amt-overlay')) { reveal(); return; }
+                  var obs = new MutationObserver(function() {
+                    if (document.getElementById('amt-overlay')) {
+                      obs.disconnect();
+                      reveal();
+                    }
+                  });
+                  obs.observe(document.documentElement, { childList: true, subtree: true });
+                  setTimeout(function() { obs.disconnect(); reveal(); }, 5000);
+                })();
+              }
+            `,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var p = window.location.pathname;
+                if (p === '/hpdp' || p === '/hpdp-gtm' || p.startsWith('/product/')) {
+                  var po = new PerformanceObserver(function(list) {
+                    var entries = list.getEntries();
+                    var last = entries[entries.length - 1];
+                    if (!last) return;
+                    var badge = document.getElementById('lcp-badge');
+                    if (!badge) {
+                      badge = document.createElement('div');
+                      badge.id = 'lcp-badge';
+                      badge.style.cssText = 'position:fixed;top:60px;right:16px;z-index:9999;background:#000;color:#0f0;padding:8px 14px;border-radius:6px;font-family:monospace;font-size:13px;opacity:0.9;pointer-events:none;';
+                      document.body.appendChild(badge);
+                    }
+                    badge.textContent = 'LCP: ' + Math.round(last.startTime) + 'ms';
+                  });
+                  po.observe({ type: 'largest-contentful-paint', buffered: true });
+                }
+              })();
+            `,
+          }}
+        />
       </head>
       <body>
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
+        <GtmScripts />
         <header
           style={{
             padding: "0.75rem 1.5rem",
@@ -50,7 +84,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             SUMMIT SUPPLY CO.
           </a>
           <nav style={{ display: "flex", gap: "1.5rem", fontSize: "0.875rem" }}>
-            <a href="/product/example.html">Product</a>
+            <a href="/product/example.html">PDP</a>
+            <a href="/hpdp">HPDP</a>
+            <a href="/hpdp-gtm">HPDP-GTM</a>
             <a href="/category">Category</a>
             <a href="/checkout">Checkout</a>
             <a href="/orderConfirmation">Order Confirmation</a>
