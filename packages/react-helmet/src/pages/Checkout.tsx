@@ -5,11 +5,6 @@ export default function Checkout() {
     <>
       <Helmet>
         <title>Checkout - Store</title>
-        <script
-          src="https://amt.adeptmind.ai/c9e02494/amt.js"
-          async
-          fetchPriority="high"
-        />
       </Helmet>
       <main style={{ padding: "2rem" }}>
         <h1>Checkout</h1>
