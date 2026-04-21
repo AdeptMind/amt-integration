@@ -3,6 +3,7 @@
   if (
     pathname === "/hpdp" ||
     pathname === "/hpdp-gtm" ||
+    pathname === "/hpdp-gtm-optimized" ||
     pathname.startsWith("/product/")
   ) {
     var expanded = false;

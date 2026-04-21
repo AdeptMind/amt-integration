@@ -179,10 +179,22 @@
     renderSizes();
   }
 
-  // Run when DOM is ready
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", buildOverlay);
-  } else {
+  var hasRun = false;
+
+  function run() {
+    if (hasRun) return;
+    hasRun = true;
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", buildOverlay);
+      return;
+    }
+
+    if (document.querySelector("main")) {
+      buildOverlay();
+      return;
+    }
+
     var observer = new MutationObserver(function () {
       if (document.querySelector("main")) {
         observer.disconnect();
@@ -190,6 +202,16 @@
       }
     });
     observer.observe(document.body, { childList: true, subtree: true });
-    buildOverlay();
+  }
+
+  // Expose the namespace, preserving any pre-existing flags (e.g. isEnabled set
+  // before this script loaded)
+  window.adeptmind = window.adeptmind || {};
+  window.adeptmind.hpdp = window.adeptmind.hpdp || {};
+  window.adeptmind.hpdp.enable = run;
+
+  // Auto-run if the caller set isEnabled before this script loaded
+  if (window.adeptmind.hpdp.isEnabled === true) {
+    run();
   }
 })();

@@ -10,5 +10,8 @@
     "dev:react-helmet": "npm run start --workspace=@amt-integration/react-helmet",
     "build:nextjs": "npm run build --workspace=@amt-integration/nextjs",
     "build:react-helmet": "npm run build --workspace=@amt-integration/react-helmet"
+  },
+  "dependencies": {
+    "simple-ab-testing": "^1.0.0"
   }
 }

@@ -1,22 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import Script from "next/script";
 import { useState } from "react";
-
-const EXPERIMENT_SETUP = `
-  (function() {
-    var inExp = SimpleAbTesting.getBucketedValue('ab-tests', 'am_hpdp', 50);
-    if (inExp) {
-      window.adeptmind = window.adeptmind || {};
-      window.adeptmind.hpdp = window.adeptmind.hpdp || {};
-      window.adeptmind.hpdp.isEnabled = true;
-      if (window.adeptmind.hpdp.enable) {
-        window.adeptmind.hpdp.enable();
-      }
-    }
-  })();
-`;
 
 const COLORS = [
   { value: "#1a1a1a", name: "Black" },
@@ -27,20 +11,12 @@ const COLORS = [
 
 const SIZES = ["XS", "S", "M", "L", "XL"];
 
-export default function ProductPage() {
+export default function HpdpGtmPage() {
   const [selectedColor, setSelectedColor] = useState(COLORS[0]);
   const [selectedSize, setSelectedSize] = useState("M");
 
   return (
-    <>
-      <Script
-        src="https://amt.adeptmind.ai/simple-ab-testing/index.global.js"
-        strategy="beforeInteractive"
-      />
-      <Script id="amt-hpdp-experiment" strategy="beforeInteractive">
-        {EXPERIMENT_SETUP}
-      </Script>
-      <main style={{ padding: "1rem 2rem", maxWidth: "1500px", margin: "0 auto" }}>
+    <main style={{ padding: "1rem 2rem", maxWidth: "1500px", margin: "0 auto" }}>
       <div
         style={{
           display: "grid",
@@ -56,14 +32,10 @@ export default function ProductPage() {
             overflow: "hidden",
           }}
         >
-          <Image
+          <img
             src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80"
             alt="Alpine Summit Jacket"
-            width={800}
-            height={1000}
-            sizes="(max-width: 1500px) 50vw, 750px"
-            priority
-            style={{ width: "100%", height: "auto", display: "block" }}
+            style={{ width: "100%", display: "block" }}
           />
         </div>
 
@@ -181,6 +153,5 @@ export default function ProductPage() {
         </div>
       </div>
     </main>
-    </>
   );
 }

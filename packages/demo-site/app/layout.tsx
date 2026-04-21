@@ -19,7 +19,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              if (window.location.pathname === '/hpdp-gtm' || window.location.pathname === '/hpdp') {
+              if (window.location.pathname === '/hpdp-gtm' || window.location.pathname === '/hpdp-gtm-optimized' || window.location.pathname === '/hpdp') {
                 var s = document.createElement('style');
                 s.id = 'amt-whiteout';
                 s.textContent = 'main { visibility: hidden !important; }';
@@ -43,7 +43,7 @@ export default function RootLayout({
             `,
           }}
         />
-        <Script src="/lcp-badge.js" strategy="beforeInteractive" />
+        <Script src="/lcp-badge.js" strategy="lazyOnload" />
       </head>
       <body>
         <GtmScripts />
@@ -64,6 +64,7 @@ export default function RootLayout({
             <a href="/product/example.html">PDP</a>
             <a href="/hpdp">HPDP</a>
             <a href="/hpdp-gtm">HPDP-GTM</a>
+            <a href="/hpdp-gtm-optimized">HPDP-GTM-Optimized</a>
             <a href="/category">Category</a>
             <a href="/checkout">Checkout</a>
             <a href="/orderConfirmation">Order Confirmation</a>

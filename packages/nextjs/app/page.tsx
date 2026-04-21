@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <Script
-        src="https://amt.adeptmind.ai/c9e02494/amt.js"
+        src="https://amt.adeptmind.ai/d1h7j8l9/amt.js"
         strategy="beforeInteractive"
         fetchPriority="high"
         async={true}

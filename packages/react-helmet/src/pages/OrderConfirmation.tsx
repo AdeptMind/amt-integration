@@ -6,7 +6,7 @@ export default function OrderConfirmation() {
       <Helmet>
         <title>Order Confirmation - Store</title>
         <script
-          src="https://amt.adeptmind.ai/c9e02494/amt.js"
+          src="https://amt.adeptmind.ai/d1h7j8l9/amt.js"
           async
           fetchPriority="high"
         />

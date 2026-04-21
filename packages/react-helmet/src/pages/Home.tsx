@@ -7,7 +7,7 @@ export default function Home() {
         <title>Store</title>
         <meta name="description" content="Simple React store" />
         <script
-          src="https://amt.adeptmind.ai/c9e02494/amt.js"
+          src="https://amt.adeptmind.ai/d1h7j8l9/amt.js"
           async
           fetchPriority="high"
         />

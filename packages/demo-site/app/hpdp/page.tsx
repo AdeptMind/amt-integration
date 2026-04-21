@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 const COLORS = [
@@ -32,10 +33,14 @@ export default function HpdpPage() {
             overflow: "hidden",
           }}
         >
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80"
             alt="Alpine Summit Jacket"
-            style={{ width: "100%", display: "block" }}
+            width={800}
+            height={1000}
+            priority
+            sizes="(max-width: 1500px) 50vw, 750px"
+            style={{ width: "100%", height: "auto", display: "block" }}
           />
         </div>
 

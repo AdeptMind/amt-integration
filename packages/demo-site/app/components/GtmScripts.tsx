@@ -5,13 +5,39 @@ import Script from "next/script";
 
 const GTM_ID = "GTM-KBK25ZLL";
 
+const EXPERIMENT_SETUP = `
+  (function() {
+    var inExp = SimpleAbTesting.getBucketedValue('ab-tests', 'am_hpdp', 100);
+    if (inExp) {
+      window.adeptmind = window.adeptmind || {};
+      window.adeptmind.hpdp = window.adeptmind.hpdp || {};
+      window.adeptmind.hpdp.isEnabled = true;
+      if (window.adeptmind.hpdp.enable) {
+        window.adeptmind.hpdp.enable();
+      }
+    }
+  })();
+`;
+
 export default function GtmScripts() {
   const pathname = usePathname();
   const isHpdp = pathname === "/hpdp";
-
+  const isHpdpGtm = pathname === "/hpdp-gtm" || pathname === "/hpdp-gtm-optimized";
+  const runExperiment = isHpdp || isHpdpGtm;
 
   return (
     <>
+      {runExperiment && (
+        <Script
+          src="https://amt.adeptmind.ai/simple-ab-testing/index.global.js"
+          strategy="beforeInteractive"
+        />
+      )}
+      {runExperiment && (
+        <Script id="amt-hpdp-experiment" strategy="beforeInteractive">
+          {EXPERIMENT_SETUP}
+        </Script>
+      )}
       {!isHpdp && (
         <Script id="gtm-script" strategy="beforeInteractive">
           {`
