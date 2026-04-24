@@ -3,3 +3,7 @@ node_modules
 build
 dist
 .env
+
+# Control Plane deploy config — kept private (infra details)
+cpln-workload.yaml
+cpln-*.local.yaml
