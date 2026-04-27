@@ -5,22 +5,22 @@
     {
       name: "Trailbreak Windbreaker",
       price: "$129.00",
-      image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&q=80",
+      image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&q=80&auto=format",
     },
     {
       name: "Summit Down Vest",
       price: "$189.00",
-      image: "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=400&q=80",
+      image: "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=400&q=80&auto=format",
     },
     {
       name: "Ridgeline Parka",
       price: "$349.00",
-      image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=400&q=80",
+      image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=400&q=80&auto=format",
     },
     {
       name: "Basecamp Fleece",
       price: "$99.00",
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&q=80",
+      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&q=80&auto=format",
     },
   ];
 
@@ -45,8 +45,13 @@
     // Col 1: Hero image
     var imgCol = document.createElement("div");
     imgCol.style.cssText = "background:#f5f5f5;border-radius:8px;overflow:hidden;position:sticky;top:1rem;";
+    // Hero is the LCP element once HPDP replaces the native page. Prime it
+    // with fetchpriority=high, eager loading, and sync decoding so it lands
+    // on screen as early as possible.
     imgCol.innerHTML =
-      '<img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80" alt="Alpine Summit Jacket" style="width:100%;display:block;">';
+      '<img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80&auto=format" ' +
+      'alt="Alpine Summit Jacket" fetchpriority="high" loading="eager" decoding="sync" ' +
+      'style="width:100%;display:block;">';
 
     // Col 2: Product details
     var detailsCol = document.createElement("div");
@@ -104,7 +109,7 @@
       productsGrid.innerHTML +=
         '<div style="cursor:pointer;">' +
           '<div style="background:#f5f5f5;border-radius:8px;overflow:hidden;margin-bottom:0.75rem;aspect-ratio:3/4;">' +
-            '<img src="' + p.image + '" alt="' + p.name + '" style="width:100%;height:100%;object-fit:cover;display:block;">' +
+            '<img src="' + p.image + '" alt="' + p.name + '" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">' +
           '</div>' +
           '<p style="margin:0 0 0.25rem 0;font-weight:600;font-size:0.9rem;">' + p.name + '</p>' +
           '<p style="margin:0;color:#444;font-size:0.875rem;">' + p.price + '</p>' +

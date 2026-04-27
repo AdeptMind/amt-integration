@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 
 const COLORS = [
@@ -33,13 +32,22 @@ export default function HpdpPage() {
             overflow: "hidden",
           }}
         >
-          <Image
-            src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80"
+          {/*
+            Plain <img> with the same raw Unsplash URL the AMT overlay
+            requests at runtime. Next.js's <Image> would route through
+            `/_next/image?…` and force a separate cache entry — wasted
+            bytes since this hero gets hidden by the AMT overlay anyway.
+            The Link response header in next.config.ts preloads this exact
+            URL so the browser fetches it once and both this <img> and the
+            overlay's <img> hit the same cache entry.
+          */}
+          <img
+            src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80&auto=format"
             alt="Alpine Summit Jacket"
             width={800}
             height={1000}
-            priority
-            sizes="(max-width: 1500px) 50vw, 750px"
+            fetchPriority="high"
+            decoding="sync"
             style={{ width: "100%", height: "auto", display: "block" }}
           />
         </div>

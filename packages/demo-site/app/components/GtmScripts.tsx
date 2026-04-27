@@ -51,7 +51,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       )}
       {isHpdp && (
         <Script
-          src="https://amt.adeptmind.ai/d1h7j8l9/amt.js"
+          src={
+            process.env.NODE_ENV === "production"
+              ? "https://amt.adeptmind.ai/d1h7j8l9/amt.js"
+              : "/amt.js"
+          }
           strategy="beforeInteractive"
           fetchPriority="high"
         />
